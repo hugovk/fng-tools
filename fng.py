@@ -1,3 +1,4 @@
+from __future__ import print_function
 import re
 from PIL import Image, ImageDraw
 from xml.etree.cElementTree import parse
@@ -115,8 +116,8 @@ if __name__ == '__main__':
 
     sizes, max_w, max_h = get_sizes_from_xml()
 
-    print len(sizes)
-    print max_w, max_h
+    print(len(sizes))
+    print(max_w, max_h)
 
     plot_sizes(sizes, max_w, max_h)
 
