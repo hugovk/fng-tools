@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from __future__ import print_function
 import re
 from PIL import Image, ImageDraw
@@ -96,18 +97,45 @@ def get_sizes_from_xml():
     return sizes, max_w, max_h
 
 
+def stats(sizes):
+    print("Get stats")
+    widths = [s[0] for s in sizes]
+    heights = [s[1] for s in sizes]
+
+    w_avg = sum(widths) / float(len(widths))
+    h_avg = sum(heights) / float(len(heights))
+    print("Avg:\t", w_avg, "x", h_avg, "cm")
+
+    try:
+        from collections import Counter
+        data = Counter(widths)
+        w_mode = data.most_common(1)[0][0]
+        data = Counter(heights)
+        h_mode = data.most_common(1)[0][0]
+        print("Mode:\t", w_mode, "x", h_mode, "cm")
+    except ImportError:
+        pass
+
+
+def centred(w, h, big_size):
+    big_w, big_h = big_size
+
+    x0 = (big_w - w) / 2
+    x1 = x0 + w
+    y0 = (big_h - h) / 2
+    y1 = y0 + h
+
+    return [(x0, y0), (x1, y1)]
+
+
 def plot_sizes(sizes, max_w, max_h):
     """sizes is a list of (width, height)"""
+    print("Plot sizes")
     im = Image.new('RGB', (int(max_w * 1.1), int(max_h * 1.1)), "white")
     draw = ImageDraw.Draw(im)
 
-    for s in sizes:
-        # Centre it
-        x0 = (im.size[0] - s[0]) / 2
-        x1 = x0 + s[0]
-        y0 = (im.size[1] - s[1]) / 2
-        y1 = y0 + s[1]
-        draw.rectangle([(x0, y0), (x1, y1)], outline="black")
+    for (w, h) in sizes:
+        draw.rectangle(centred(w, h, im.size), outline="black")
 
     im.save("out.png")
 
@@ -116,8 +144,10 @@ if __name__ == '__main__':
 
     sizes, max_w, max_h = get_sizes_from_xml()
 
-    print(len(sizes))
-    print(max_w, max_h)
+    print("Total:\t", len(sizes))
+    print("Max:\t", max_w, "x", max_h, "cm")
+
+    stats(sizes)
 
     plot_sizes(sizes, max_w, max_h)
 
