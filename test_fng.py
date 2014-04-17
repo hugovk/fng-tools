@@ -20,7 +20,7 @@ class TestIt(unittest.TestCase):
         self.assertEqual(cm, 41.5)
 
     def test_3(self):
-        text = u'leveys p\xe4iv\xe4mitta 30,00 cm'
+        text = 'leveys p\xe4iv\xe4mitta 30,00 cm'
         cm = fng.get_cm(text)
         self.assertEqual(cm, 30.0)
 
