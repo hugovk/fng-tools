@@ -10,6 +10,7 @@ python:
 
 script:
   - python test_fng.py
+  - python test_artists.py
 
 after_success:
   - pip install pep8 pyflakes
