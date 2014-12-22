@@ -8,6 +8,8 @@ python:
   - 3.4
   - "pypy"
 
+sudo: false
+
 script:
   - python test_fng.py
   - python test_artists.py
