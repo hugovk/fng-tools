@@ -3,19 +3,20 @@
 """
 Show top 25 artists represented in the FNG collection.
 
-From 13 Sept 2014:
+From 12 Feb 2015:
 
-Found 36655 artworks with artists
-1. Palsa, Kalervo (3037)
-2. tuntematon (1395)
-3. Edelfelt, Albert (1314)
+Found 36945 artworks with artists
+
+1. Palsa, Kalervo (3036)
+2. tuntematon (1393)
+3. Edelfelt, Albert (1318)
 4. Soldan-Brofeldt, Venny (1267)
-5. Sjöstrand, Carl Eneas (995)
+5. Sjöstrand, Carl Eneas (994)
 6. Simberg, Hugo (804)
-7. Gallen-Kallela, Akseli (463)
+7. Gallen-Kallela, Akseli (464)
 8. Kuusi, Helmi (430)
-9. Ekman, Robert Wilhelm (381)
-10. Thomé, Verner (380)
+9. Thomé, Verner (381)
+10. Ekman, Robert Wilhelm (380)
 11. Kunisada (365)
 12. Finch, Alfred William (364)
 13. Holmberg, Werner (354)
@@ -25,12 +26,13 @@ Found 36655 artworks with artists
 17. Enckell, Magnus (288)
 18. Helenius, Ester (276)
 19. Järnefelt, Eero (270)
-20. Sparre, Louis (261)
-21. Mikkonen, Aune (261)
-22. Godenhjelm, Berndt Abraham (212)
+20. Mikkonen, Aune (261)
+21. Sparre, Louis (261)
+22. Godenhjelm, Berndt Abraham (213)
 23. Wiik, Maria (206)
 24. Jansson, Karl Emanuel (203)
 25. Schjerfbeck, Helene (201)
+
 """
 from __future__ import print_function
 from __future__ import unicode_literals
@@ -39,6 +41,7 @@ from xml.etree.cElementTree import parse
 
 try:
     import timing
+    assert timing  # silence warnings
 except:
     pass
 
