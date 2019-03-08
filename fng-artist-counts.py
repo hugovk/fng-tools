@@ -63,9 +63,9 @@ def get_artists_from_xml():
 
         for grandchild in child:
             if grandchild.tag == "{http://purl.org/dc/elements/1.1/}type":
-                # print grandchild.tag
-                # print grandchild.attrib
-                # print grandchild.text
+                # print(grandchild.tag)
+                # print(grandchild.attrib)
+                # print(grandchild.text)
                 if grandchild.text == "artwork":
                     artwork = True
                 elif grandchild.text == "artist":
