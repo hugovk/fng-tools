@@ -142,21 +142,21 @@ def centred(w, h, big_size):
     return [(x0, y0), (x1, y1)]
 
 
-def plot_sizes(sizes, max_w, max_h):
+def plot_sizes(sizes, max_w, max_h, scale):
     """sizes is a list of (width, height)"""
     print("Plot sizes")
-    im = Image.new("RGB", (int(max_w * 1.1), int(max_h * 1.1)), "white")
+    im = Image.new("RGB", (int(max_w / scale * 1.1), int(max_h / scale * 1.1)), "white")
     draw = ImageDraw.Draw(im)
 
     for (w, h) in sizes:
-        draw.rectangle(centred(w, h, im.size), outline="black")
+        draw.rectangle(centred(w / scale, h / scale, im.size), outline="black")
 
     im.save("out.png")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Plot the sizes of all the artworks in the Finnish National Gallery",
+        description="Plot the sizes of all artworks in the Finnish National Gallery",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
@@ -165,6 +165,14 @@ if __name__ == "__main__":
         default=None,
         metavar="cm",
         help="Limit to artworks smaller than this",
+    )
+    parser.add_argument(
+        "-s",
+        "--scale",
+        type=float,
+        default=1,
+        metavar="cm per pixel",
+        help="Scale of output image. Use 0.2 cm/px for larger, more detailed output.",
     )
     args = parser.parse_args()
 
@@ -175,6 +183,6 @@ if __name__ == "__main__":
 
     stats(sizes)
 
-    plot_sizes(sizes, max_w, max_h)
+    plot_sizes(sizes, max_w, max_h, args.scale)
 
 # End of file
