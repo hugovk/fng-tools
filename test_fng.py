@@ -1,26 +1,24 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Unit tests for fng.py
 """
-from __future__ import unicode_literals
 import unittest
 import fng
 
 
 class TestIt(unittest.TestCase):
-
     def test_1(self):
-        text = 'leveys 40,00 cm'
+        text = "leveys 40,00 cm"
         cm = fng.get_cm(text)
         self.assertEqual(cm, 40.0)
 
     def test_2(self):
-        text = 'korkeus 41,50 cm'
+        text = "korkeus 41,50 cm"
         cm = fng.get_cm(text)
         self.assertEqual(cm, 41.5)
 
     def test_3(self):
-        text = 'leveys p\xe4iv\xe4mitta 30,00 cm'
+        text = "leveys p\xe4iv\xe4mitta 30,00 cm"
         cm = fng.get_cm(text)
         self.assertEqual(cm, 30.0)
 
@@ -35,7 +33,7 @@ class TestIt(unittest.TestCase):
         self.assertEqual(cm, 7.5)
 
     def test_6(self):
-        text = 'korkeus 72,50 cm'
+        text = "korkeus 72,50 cm"
         cm = fng.get_cm(text)
         self.assertEqual(cm, 72.5)
 
@@ -59,5 +57,6 @@ class TestIt(unittest.TestCase):
         cm = fng.get_cm(text)
         self.assertEqual(cm, 410.0)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

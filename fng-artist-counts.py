@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Show top 25 artists represented in the FNG collection.
@@ -34,21 +34,15 @@ Found 36945 artworks with artists
 25. Schjerfbeck, Helene (201)
 
 """
-from __future__ import print_function
-from __future__ import unicode_literals
 from collections import Counter
 from xml.etree.cElementTree import parse
 
 try:
     import timing
+
     assert timing  # silence warnings
-except:
+except ImportError:
     pass
-
-
-# Windows cmd.exe cannot do Unicode so encode first
-def print_it(text):
-    print(text.encode('utf-8'))
 
 
 def get_artists_from_xml():
@@ -98,12 +92,12 @@ def most_frequent_with_counts(some_list, number=None):
     return most_common
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     artists = get_artists_from_xml()
     print("Found", len(artists), "artworks with artists")
     top = most_frequent_with_counts(artists, 25)
     for i, (artist, count) in enumerate(top):
-        print_it(str(i+1) + ". " + artist + " (" + str(count) + ")")
+        print(str(i + 1) + ". " + artist + " (" + str(count) + ")")
 
 # End of file

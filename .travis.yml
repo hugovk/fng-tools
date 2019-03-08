@@ -1,28 +1,22 @@
 language: python
-
-python:
-  - 2.7
-  - 3.6
-  - 3.5
-  - 3.4
-  - "pypy"
-  - "pypy3"
-
-sudo: false
-
-script:
-  - python test_fng.py
-  - python test_artists.py
-
-after_success:
-  - pip install pep8 pyflakes
-  - pep8 *.py
-  - pyflakes *.py
+cache: pip
 
 matrix:
-  allow_failures:
+  include:
+    - python: 3.7
+      dist: xenial
     - python: 3.6
-    - python: 3.5
-    - python: 3.4
-    - python: "pypy"
-    - python: "pypy3"
+  fast_finish: true
+
+install:
+ - pip install --upgrade pip
+ - pip install --upgrade black flake8 pytest
+ - pip install --upgrade -r requirements.txt
+
+script:
+  # Unit tests
+  - pytest
+
+  # Static analysis
+  - flake8
+  - black . --check --diff

@@ -7,13 +7,10 @@ from xml.etree.cElementTree import parse
 
 try:
     import timing
-except:
+
+    assert timing  # silence warnings
+except ImportError:
     pass
-
-
-# Windows cmd.exe cannot do Unicode so encode first
-def print_it(text):
-    print(text.encode('utf-8'))
 
 
 def year_from_date(date):
@@ -21,7 +18,7 @@ def year_from_date(date):
     if date is None:
         return None
 
-    match = re.search("\d\d\d\d", date)
+    match = re.search(r"\d\d\d\d", date)
     if match:
         year = int(match.group(0))
 
@@ -68,26 +65,26 @@ def artist_data_from_xml():
             elif grandchild.tag == "{http://purl.org/dc/elements/1.1/}title":
                 # print(1, grandchild.tag)
                 # print(2, grandchild.attrib)
-                # print_it("3 " + grandchild.text)
+                # print("3 " + grandchild.text)
                 name = grandchild.text
 
             elif grandchild.tag == "{http://purl.org/dc/elements/1.1/}date":
-                if grandchild.attrib['type'] == 'birth':
+                if grandchild.attrib["type"] == "birth":
                     birthdate = grandchild.text
-                    if 'loc' in grandchild.attrib:
-                        birthplace = grandchild.attrib['loc']
-                if grandchild.attrib['type'] == 'death':
+                    if "loc" in grandchild.attrib:
+                        birthplace = grandchild.attrib["loc"]
+                if grandchild.attrib["type"] == "death":
                     deathdate = grandchild.text
-                    if 'loc' in grandchild.attrib:
-                        deathplace = grandchild.attrib['loc']
+                    if "loc" in grandchild.attrib:
+                        deathplace = grandchild.attrib["loc"]
 
-# {http://purl.org/dc/elements/1.1/}date
-# {'loc': 'Tampere', 'type': 'birth'}
-# 1907-03-08
+        # {http://purl.org/dc/elements/1.1/}date
+        # {'loc': 'Tampere', 'type': 'birth'}
+        # 1907-03-08
 
-# {http://purl.org/dc/elements/1.1/}date
-# {'loc': 'Tampere', 'type': 'death'}
-# 1999-11-18
+        # {http://purl.org/dc/elements/1.1/}date
+        # {'loc': 'Tampere', 'type': 'death'}
+        # 1999-11-18
 
         if artist:
 
@@ -95,16 +92,17 @@ def artist_data_from_xml():
             death_year = year_from_date(deathdate)
 
             # Skip bad data
-            if ((name == "Tampere") or
-                    (name == "Milano") or
-                    (name == "Moskova, Venäjä") or
-                    (death_year < birth_year) or
-                    (birthdate == deathdate) or
-                    (birth_year == death_year) or
-                    (birth_year == 180 and death_year == 1682) or
-                    (birthdate == "(1100 - 1874)" and
-                        deathdate == "(1100 - 1989)") or
-                    (birthdate == "(1000 - 1916)")):
+            if (
+                (name == "Tampere")
+                or (name == "Milano")
+                or (name == "Moskova, Venäjä")
+                or (birth_year and death_year and death_year < birth_year)
+                or (birthdate == deathdate)
+                or (birth_year == death_year)
+                or (birth_year == 180 and death_year == 1682)
+                or (birthdate == "(1100 - 1874)" and deathdate == "(1100 - 1989)")
+                or (birthdate == "(1000 - 1916)")
+            ):
                 continue
             if death_year and birth_year:
                 if death_year - birth_year > 150:
@@ -121,8 +119,7 @@ def artist_data_from_xml():
                 if death_year > max_death_year:
                     max_death_year = death_year
 
-            artists.append(
-                [name, birthdate, birthplace, deathdate, deathplace])
+            artists.append([name, birthdate, birthplace, deathdate, deathplace])
 
     print(min_birth_year)
     print(max_birth_year)
@@ -132,7 +129,7 @@ def artist_data_from_xml():
     return artists
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     artists = artist_data_from_xml()
 

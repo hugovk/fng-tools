@@ -1,29 +1,27 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Unit tests for artists.py
 """
-from __future__ import unicode_literals
 import unittest
 import artists
 
 
 class TestIt(unittest.TestCase):
-
     def test_1(self):
-        date = '1895-04-02'
+        date = "1895-04-02"
         year = artists.year_from_date(date)
         self.assertEqual(year, 1895)
 
     def test_2(self):
-        date = '1699'
+        date = "1699"
         year = artists.year_from_date(date)
         self.assertEqual(year, 1699)
 
     def test_3(self):
         date = None
         year = artists.year_from_date(date)
-        self.assertEqual(year, None)
+        self.assertIsNone(year)
 
     def test_4(self):
         date = "1741 (jälkeen)"
@@ -46,7 +44,7 @@ class TestIt(unittest.TestCase):
         self.assertEqual(year, 1630)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
 
 # End of file

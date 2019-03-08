@@ -1,12 +1,13 @@
-#!/usr/bin/env python
-from __future__ import print_function
+#!/usr/bin/env python3
 import re
 from PIL import Image, ImageDraw
 from xml.etree.cElementTree import parse
 
 try:
     import timing
-except:
+
+    assert timing  # silence warnings
+except ImportError:
     pass
 
 
@@ -25,17 +26,17 @@ def get_cm(text):
     text = text.replace(",", ".")
 
     # Try cm
-    found = re.findall("(\d+\.\d+) cm", text)
+    found = re.findall(r"(\d+\.\d+) cm", text)
     if len(found):
         cm = float(found[0])
     else:
         # Try mm
-        found = re.findall("(\d+\.\d+) mm", text)
+        found = re.findall(r"(\d+\.\d+) mm", text)
         if len(found):
             cm = float(found[0]) / 10
         else:
             # Try m
-            found = re.findall("(\d+\.\d+) m", text)
+            found = re.findall(r"(\d+\.\d+) m", text)
             if len(found):
                 cm = float(found[0]) * 100
                 # Avoid float('4.1') * 100 == 409.99999999999994
@@ -77,7 +78,7 @@ def get_sizes_from_xml():
                 # print grandchild.tag
                 # print grandchild.attrib
                 # print grandchild.text
-                if grandchild.attrib == {'type': 'dimension'}:
+                if grandchild.attrib == {"type": "dimension"}:
                     if grandchild.text.startswith("leveys"):
                         width = grandchild.text
                     elif grandchild.text.startswith("korkeus"):
@@ -108,6 +109,7 @@ def stats(sizes):
 
     try:
         from collections import Counter
+
         data = Counter(widths)
         w_mode = data.most_common(1)[0][0]
         data = Counter(heights)
@@ -131,7 +133,7 @@ def centred(w, h, big_size):
 def plot_sizes(sizes, max_w, max_h):
     """sizes is a list of (width, height)"""
     print("Plot sizes")
-    im = Image.new('RGB', (int(max_w * 1.1), int(max_h * 1.1)), "white")
+    im = Image.new("RGB", (int(max_w * 1.1), int(max_h * 1.1)), "white")
     draw = ImageDraw.Draw(im)
 
     for (w, h) in sizes:
@@ -140,7 +142,7 @@ def plot_sizes(sizes, max_w, max_h):
     im.save("out.png")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     sizes, max_w, max_h = get_sizes_from_xml()
 
