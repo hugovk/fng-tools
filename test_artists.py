@@ -8,14 +8,13 @@ import artists
 
 
 class TestIt(unittest.TestCase):
-
     def test_1(self):
-        date = '1895-04-02'
+        date = "1895-04-02"
         year = artists.year_from_date(date)
         self.assertEqual(year, 1895)
 
     def test_2(self):
-        date = '1699'
+        date = "1699"
         year = artists.year_from_date(date)
         self.assertEqual(year, 1699)
 
@@ -45,7 +44,7 @@ class TestIt(unittest.TestCase):
         self.assertEqual(year, 1630)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
 
 # End of file

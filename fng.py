@@ -76,7 +76,7 @@ def get_sizes_from_xml():
                 # print grandchild.tag
                 # print grandchild.attrib
                 # print grandchild.text
-                if grandchild.attrib == {'type': 'dimension'}:
+                if grandchild.attrib == {"type": "dimension"}:
                     if grandchild.text.startswith("leveys"):
                         width = grandchild.text
                     elif grandchild.text.startswith("korkeus"):
@@ -107,6 +107,7 @@ def stats(sizes):
 
     try:
         from collections import Counter
+
         data = Counter(widths)
         w_mode = data.most_common(1)[0][0]
         data = Counter(heights)
@@ -130,7 +131,7 @@ def centred(w, h, big_size):
 def plot_sizes(sizes, max_w, max_h):
     """sizes is a list of (width, height)"""
     print("Plot sizes")
-    im = Image.new('RGB', (int(max_w * 1.1), int(max_h * 1.1)), "white")
+    im = Image.new("RGB", (int(max_w * 1.1), int(max_h * 1.1)), "white")
     draw = ImageDraw.Draw(im)
 
     for (w, h) in sizes:
@@ -139,7 +140,7 @@ def plot_sizes(sizes, max_w, max_h):
     im.save("out.png")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     sizes, max_w, max_h = get_sizes_from_xml()
 

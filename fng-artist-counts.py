@@ -39,6 +39,7 @@ from xml.etree.cElementTree import parse
 
 try:
     import timing
+
     assert timing  # silence warnings
 except:
     pass
@@ -46,7 +47,7 @@ except:
 
 # Windows cmd.exe cannot do Unicode so encode first
 def print_it(text):
-    print(text.encode('utf-8'))
+    print(text.encode("utf-8"))
 
 
 def get_artists_from_xml():
@@ -96,12 +97,12 @@ def most_frequent_with_counts(some_list, number=None):
     return most_common
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     artists = get_artists_from_xml()
     print("Found", len(artists), "artworks with artists")
     top = most_frequent_with_counts(artists, 25)
     for i, (artist, count) in enumerate(top):
-        print_it(str(i+1) + ". " + artist + " (" + str(count) + ")")
+        print_it(str(i + 1) + ". " + artist + " (" + str(count) + ")")
 
 # End of file

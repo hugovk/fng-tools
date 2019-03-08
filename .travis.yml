@@ -9,11 +9,16 @@ matrix:
     - python: pypy3
   fast_finish: true
 
+install:
+ - pip install --upgrade pip
+ - pip install --upgrade black flake8
+ - pip install --upgrade -r requirements.txt
+
 script:
+  # Unit tests
   - python test_fng.py
   - python test_artists.py
 
-after_success:
-  - pip install pep8 pyflakes
-  - pep8 *.py
-  - pyflakes *.py
+  # Static analysis
+  - flake8
+  - black . --check --diff
