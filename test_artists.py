@@ -21,7 +21,7 @@ class TestIt(unittest.TestCase):
     def test_3(self):
         date = None
         year = artists.year_from_date(date)
-        self.assertEqual(year, None)
+        self.assertIsNone(year)
 
     def test_4(self):
         date = "1741 (jälkeen)"
