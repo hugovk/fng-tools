@@ -5,7 +5,9 @@ from xml.etree.cElementTree import parse
 
 try:
     import timing
-except:
+
+    assert timing  # silence warnings
+except ImportError:
     pass
 
 

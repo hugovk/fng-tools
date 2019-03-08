@@ -41,7 +41,7 @@ try:
     import timing
 
     assert timing  # silence warnings
-except:
+except ImportError:
     pass
 
 
