@@ -21,7 +21,7 @@ def year_from_date(date):
     if date is None:
         return None
 
-    match = re.search("\d\d\d\d", date)
+    match = re.search(r"\d\d\d\d", date)
     if match:
         year = int(match.group(0))
 

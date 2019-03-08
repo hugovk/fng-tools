@@ -24,17 +24,17 @@ def get_cm(text):
     text = text.replace(",", ".")
 
     # Try cm
-    found = re.findall("(\d+\.\d+) cm", text)
+    found = re.findall(r"(\d+\.\d+) cm", text)
     if len(found):
         cm = float(found[0])
     else:
         # Try mm
-        found = re.findall("(\d+\.\d+) mm", text)
+        found = re.findall(r"(\d+\.\d+) mm", text)
         if len(found):
             cm = float(found[0]) / 10
         else:
             # Try m
-            found = re.findall("(\d+\.\d+) m", text)
+            found = re.findall(r"(\d+\.\d+) m", text)
             if len(found):
                 cm = float(found[0]) * 100
                 # Avoid float('4.1') * 100 == 409.99999999999994
