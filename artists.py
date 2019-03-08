@@ -101,7 +101,7 @@ def artist_data_from_xml():
                 (name == "Tampere")
                 or (name == "Milano")
                 or (name == "Moskova, Venäjä")
-                or (death_year < birth_year)
+                or (birth_year and death_year and death_year < birth_year)
                 or (birthdate == deathdate)
                 or (birth_year == death_year)
                 or (birth_year == 180 and death_year == 1682)
