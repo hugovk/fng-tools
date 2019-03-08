@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Unit tests for fng.py
 """
-from __future__ import unicode_literals
 import unittest
 import fng
 

@@ -1,9 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Unit tests for artists.py
 """
-from __future__ import unicode_literals
 import unittest
 import artists
 

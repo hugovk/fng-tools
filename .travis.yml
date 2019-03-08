@@ -1,14 +1,13 @@
 language: python
+cache: pip
 
-python:
-  - 2.7
-  - 3.6
-  - 3.5
-  - 3.4
-  - "pypy"
-  - "pypy3"
-
-sudo: false
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+    - python: 3.6
+    - python: pypy3
+  fast_finish: true
 
 script:
   - python test_fng.py
@@ -18,11 +17,3 @@ after_success:
   - pip install pep8 pyflakes
   - pep8 *.py
   - pyflakes *.py
-
-matrix:
-  allow_failures:
-    - python: 3.6
-    - python: 3.5
-    - python: 3.4
-    - python: "pypy"
-    - python: "pypy3"

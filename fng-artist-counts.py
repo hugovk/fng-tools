@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Show top 25 artists represented in the FNG collection.
@@ -34,8 +34,6 @@ Found 36945 artworks with artists
 25. Schjerfbeck, Helene (201)
 
 """
-from __future__ import print_function
-from __future__ import unicode_literals
 from collections import Counter
 from xml.etree.cElementTree import parse
 

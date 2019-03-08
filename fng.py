@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-from __future__ import print_function
+#!/usr/bin/env python3
 import re
 from PIL import Image, ImageDraw
 from xml.etree.cElementTree import parse
