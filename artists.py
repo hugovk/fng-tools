@@ -13,11 +13,6 @@ except ImportError:
     pass
 
 
-# Windows cmd.exe cannot do Unicode so encode first
-def print_it(text):
-    print(text.encode("utf-8"))
-
-
 def year_from_date(date):
     year = None
     if date is None:
@@ -70,7 +65,7 @@ def artist_data_from_xml():
             elif grandchild.tag == "{http://purl.org/dc/elements/1.1/}title":
                 # print(1, grandchild.tag)
                 # print(2, grandchild.attrib)
-                # print_it("3 " + grandchild.text)
+                # print("3 " + grandchild.text)
                 name = grandchild.text
 
             elif grandchild.tag == "{http://purl.org/dc/elements/1.1/}date":

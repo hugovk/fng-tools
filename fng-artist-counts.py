@@ -45,11 +45,6 @@ except ImportError:
     pass
 
 
-# Windows cmd.exe cannot do Unicode so encode first
-def print_it(text):
-    print(text.encode("utf-8"))
-
-
 def get_artists_from_xml():
     """Return list of all artists"""
     filename = "fng-data-dc.xml"
@@ -103,6 +98,6 @@ if __name__ == "__main__":
     print("Found", len(artists), "artworks with artists")
     top = most_frequent_with_counts(artists, 25)
     for i, (artist, count) in enumerate(top):
-        print_it(str(i + 1) + ". " + artist + " (" + str(count) + ")")
+        print(str(i + 1) + ". " + artist + " (" + str(count) + ")")
 
 # End of file

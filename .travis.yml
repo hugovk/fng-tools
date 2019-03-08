@@ -10,13 +10,12 @@ matrix:
 
 install:
  - pip install --upgrade pip
- - pip install --upgrade black flake8
+ - pip install --upgrade black flake8 pytest
  - pip install --upgrade -r requirements.txt
 
 script:
   # Unit tests
-  - python test_fng.py
-  - python test_artists.py
+  - pytest
 
   # Static analysis
   - flake8
