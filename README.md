@@ -11,3 +11,4 @@ See also:
 
 * http://kokoelmat.fng.fi/api/v2support/docs/
 * https://github.com/hugovk/finnishnationalgallery
+* https://www.flickr.com/photos/hugovk/albums/72157644045546102
