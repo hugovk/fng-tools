@@ -52,10 +52,8 @@ def get_cm(text):
     return cm
 
 
-def get_sizes_from_xml(limit=None):
+def get_sizes_from_xml(filename, limit=None):
     """Return list of all sizes and the max (w, h)"""
-    filename = "fng-data-dc.xml"
-
     sizes = []
 
     print("Parse file")
@@ -159,6 +157,7 @@ if __name__ == "__main__":
         description="Plot the sizes of all artworks in the Finnish National Gallery",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
+    parser.add_argument("-x", "--xml", default="fng-data-dc.xml", help="Input XML file")
     parser.add_argument(
         "-l",
         "--limit",
@@ -176,7 +175,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    sizes, max_w, max_h = get_sizes_from_xml(args.limit)
+    sizes, max_w, max_h = get_sizes_from_xml(args.xml, args.limit)
 
     print("Total:\t", len(sizes))
     print("Max:\t", max_w, "x", max_h, "cm")
