@@ -3,8 +3,8 @@ cache: pip
 
 matrix:
   include:
+    - python: 3.8
     - python: 3.7
-      dist: xenial
     - python: 3.6
   fast_finish: true
 
