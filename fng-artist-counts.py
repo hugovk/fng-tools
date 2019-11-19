@@ -2,35 +2,35 @@
 """
 Show top 25 artists represented in the FNG collection.
 
-From 12 Feb 2015:
+From 19 Nov 2019:
 
-Found 36945 artworks with artists
+Found 39995 artworks with artists
 
-1. Palsa, Kalervo (3036)
-2. tuntematon (1393)
-3. Edelfelt, Albert (1318)
-4. Soldan-Brofeldt, Venny (1267)
-5. Sjöstrand, Carl Eneas (994)
-6. Simberg, Hugo (804)
-7. Gallen-Kallela, Akseli (464)
-8. Kuusi, Helmi (430)
-9. Thomé, Verner (381)
-10. Ekman, Robert Wilhelm (380)
-11. Kunisada (365)
-12. Finch, Alfred William (364)
-13. Holmberg, Werner (354)
-14. Kleineh, Oscar (349)
-15. Visanti, Matti (341)
-16. Wright, Magnus von (315)
-17. Enckell, Magnus (288)
-18. Helenius, Ester (276)
-19. Järnefelt, Eero (270)
-20. Mikkonen, Aune (261)
-21. Sparre, Louis (261)
-22. Godenhjelm, Berndt Abraham (213)
-23. Wiik, Maria (206)
-24. Jansson, Karl Emanuel (203)
-25. Schjerfbeck, Helene (201)
+1. Palsa, Kalervo (3038)
+2. tuntematon (1432)
+3. Pietilä, Tuulikki (1431)
+4. Edelfelt, Albert (1319)
+5. Soldan-Brofeldt, Venny (1267)
+6. Sjöstrand, Carl Eneas (995)
+7. Simberg, Hugo (807)
+8. Gallen-Kallela, Akseli (464)
+9. Kuusi, Helmi (430)
+10. Kaskipuro, Pentti (395)
+11. Thomé, Verner (382)
+12. Ekman, Robert Wilhelm (381)
+13. Finch, Alfred William (365)
+14. Kunisada (364)
+15. Holmberg, Werner (354)
+16. Kleineh, Oscar (350)
+17. Visanti, Matti (341)
+18. Wright, Magnus von (319)
+19. Enckell, Magnus (288)
+20. Järnefelt, Eero (280)
+21. Helenius, Ester (276)
+22. Sparre, Louis (262)
+23. Mikkonen, Aune (261)
+24. Godenhjelm, Berndt Abraham (213)
+25. Wiik, Maria (206)
 
 """
 from collections import Counter
