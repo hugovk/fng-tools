@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+"""
+Plot the sizes of all the artworks in the Finnish National Gallery.
+
+Example output:
+https://www.flickr.com/photos/hugovk/albums/72157644045546102
+https://www.flickr.com/photos/tags/fngpy
+"""
+import argparse
 import re
 from PIL import Image, ImageDraw
 from xml.etree.cElementTree import parse
@@ -44,10 +52,8 @@ def get_cm(text):
     return cm
 
 
-def get_sizes_from_xml():
+def get_sizes_from_xml(filename, limit=None):
     """Return list of all sizes and the max (w, h)"""
-    filename = "fng-data-dc.xml"
-
     sizes = []
 
     print("Parse file")
@@ -58,6 +64,9 @@ def get_sizes_from_xml():
 
     max_w = 0
     max_h = 0
+
+    if limit:
+        limit = float(limit)
 
     for child in root:
         artwork = False
@@ -89,11 +98,12 @@ def get_sizes_from_xml():
                 w = get_cm(width)
                 h = get_cm(height)
                 if w and h:
-                    sizes.append((w, h))
-                    if w > max_w:
-                        max_w = w
-                    if h > max_h:
-                        max_h = h
+                    if not limit or (w < limit and h < limit):
+                        sizes.append((w, h))
+                        if w > max_w:
+                            max_w = w
+                        if h > max_h:
+                            max_h = h
 
     return sizes, max_w, max_h
 
@@ -130,27 +140,48 @@ def centred(w, h, big_size):
     return [(x0, y0), (x1, y1)]
 
 
-def plot_sizes(sizes, max_w, max_h):
+def plot_sizes(sizes, max_w, max_h, scale):
     """sizes is a list of (width, height)"""
     print("Plot sizes")
-    im = Image.new("RGB", (int(max_w * 1.1), int(max_h * 1.1)), "white")
+    im = Image.new("RGB", (int(max_w / scale * 1.1), int(max_h / scale * 1.1)), "white")
     draw = ImageDraw.Draw(im)
 
     for (w, h) in sizes:
-        draw.rectangle(centred(w, h, im.size), outline="black")
+        draw.rectangle(centred(w / scale, h / scale, im.size), outline="black")
 
     im.save("out.png")
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Plot the sizes of all artworks in the Finnish National Gallery",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument("-x", "--xml", default="fng-data-dc.xml", help="Input XML file")
+    parser.add_argument(
+        "-l",
+        "--limit",
+        default=None,
+        metavar="cm",
+        help="Limit to artworks smaller than this",
+    )
+    parser.add_argument(
+        "-s",
+        "--scale",
+        type=float,
+        default=1,
+        metavar="cm per pixel",
+        help="Scale of output image. Use 0.2 cm/px for larger, more detailed output.",
+    )
+    args = parser.parse_args()
 
-    sizes, max_w, max_h = get_sizes_from_xml()
+    sizes, max_w, max_h = get_sizes_from_xml(args.xml, args.limit)
 
     print("Total:\t", len(sizes))
     print("Max:\t", max_w, "x", max_h, "cm")
 
     stats(sizes)
 
-    plot_sizes(sizes, max_w, max_h)
+    plot_sizes(sizes, max_w, max_h, args.scale)
 
 # End of file
